@@ -9,6 +9,10 @@ then
 	export PYTHONPATH=$SPARK_HOME/python:$PYTHONPATH
 fi
 
+# start the history server - the script will take of handling if the server is already up and running
+echo "Starting history server..."
+$SPARK_HOME/sbin/start-history-server.sh
+
 # this is needed when running jupyter on an ec2 instance, so that Jupyter listens on the specific public dns 
 PUBLIC_DNS=$(curl -s http://169.254.169.254/latest/meta-data/public-hostname)
 jupyter notebook --ip=$PUBLIC_DNS
